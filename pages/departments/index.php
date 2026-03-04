@@ -44,7 +44,7 @@ include __DIR__ . '/../../includes/header.php';
                                 </div>
                                 <div>
                                     <h5 class="fw-bold mb-0"><?= $dept['name'] ?></h5>
-                                    <small class="text-muted"><code><?= $dept['code'] ?></code></small>
+                                    <small class="text-muted">ID: <?= $dept['id'] ?></small>
                                 </div>
                             </div>
                             <div class="dropdown">
@@ -115,10 +115,6 @@ include __DIR__ . '/../../includes/header.php';
                         <input type="text" name="name" id="deptName" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Kode <span class="text-danger">*</span></label>
-                        <input type="text" name="code" id="deptCode" class="form-control" maxlength="20" required>
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label">Deskripsi</label>
                         <textarea name="description" id="deptDesc" class="form-control" rows="2"></textarea>
                     </div>
@@ -149,7 +145,6 @@ function editDept(dept) {
     document.getElementById('deptModalTitle').textContent = 'Edit Departemen';
     document.getElementById('deptId').value = dept.id;
     document.getElementById('deptName').value = dept.name;
-    document.getElementById('deptCode').value = dept.code;
     document.getElementById('deptDesc').value = dept.description || '';
     document.getElementById('deptManager').value = dept.manager_name || '';
     new bootstrap.Modal(document.getElementById('deptModal')).show();

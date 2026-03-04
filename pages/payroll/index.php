@@ -149,7 +149,6 @@ include __DIR__ . '/../../includes/header.php';
                         <thead>
                             <tr>
                                 <th><input type="checkbox" id="selectAll" class="form-check-input"></th>
-                                <th>No. Slip</th>
                                 <th>Karyawan</th>
                                 <th>Departemen</th>
                                 <th>Gaji Pokok</th>
@@ -164,13 +163,11 @@ include __DIR__ . '/../../includes/header.php';
                             <?php foreach ($payrolls as $p): ?>
                             <tr>
                                 <td><input type="checkbox" class="form-check-input payroll-check" value="<?= $p['id'] ?>"></td>
-                                <td><code class="fw-semibold"><?= $p['payroll_number'] ?></code></td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="avatar-circle avatar-sm" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);"><?= strtoupper(substr($p['first_name'],0,1)) ?></div>
                                         <div>
                                             <div class="fw-semibold"><?= $p['first_name'] . ' ' . $p['last_name'] ?></div>
-                                            <small class="text-muted"><?= $p['emp_id'] ?></small>
                                         </div>
                                     </div>
                                 </td>
@@ -206,7 +203,7 @@ include __DIR__ . '/../../includes/header.php';
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    App.initDataTable('#payrollTable', { order: [[2, 'asc']], columnDefs: [{orderable: false, targets: [0, 9]}] });
+    App.initDataTable('#payrollTable', { order: [[1, 'asc']], columnDefs: [{orderable: false, targets: [0, 8]}] });
     
     document.getElementById('selectAll').addEventListener('change', function() {
         document.querySelectorAll('.payroll-check').forEach(cb => cb.checked = this.checked);

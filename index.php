@@ -275,7 +275,6 @@ include __DIR__ . '/includes/header.php';
                                                 </div>
                                                 <div>
                                                     <div class="fw-semibold" style="font-size:0.875rem"><?= $rp['first_name'] . ' ' . $rp['last_name'] ?></div>
-                                                    <small class="text-muted"><?= $rp['emp_id'] ?></small>
                                                 </div>
                                             </div>
                                         </td>

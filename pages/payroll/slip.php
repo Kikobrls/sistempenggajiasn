@@ -36,7 +36,7 @@ include __DIR__ . '/../../includes/header.php';
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                 <div>
                     <h1 class="animate-fade-in"><i class="bi bi-file-earmark-text me-2 text-primary"></i>Slip Gaji</h1>
-                    <p class="subtitle mb-0"><?= $slip['payroll_number'] ?></p>
+                    <p class="subtitle mb-0">Periode: <?= $months[$slip['period_month']] . ' ' . $slip['period_year'] ?></p>
                 </div>
                 <div class="d-flex gap-2 no-print">
                     <button onclick="window.print()" class="btn btn-primary"><i class="bi bi-printer me-1"></i> Cetak</button>
@@ -70,11 +70,6 @@ include __DIR__ . '/../../includes/header.php';
                         <h5 class="fw-bold mb-0">SLIP GAJI KARYAWAN</h5>
                         <span class="opacity-75">Periode: <?= $months[$slip['period_month']] . ' ' . $slip['period_year'] ?></span>
                     </div>
-                    <div class="text-end">
-                        <span class="badge bg-white bg-opacity-20 text-white px-3 py-2" style="font-size:0.85rem;">
-                            <?= $slip['payroll_number'] ?>
-                        </span>
-                    </div>
                 </div>
             </div>
             
@@ -85,7 +80,6 @@ include __DIR__ . '/../../includes/header.php';
                     <div class="col-md-6">
                         <table class="table table-sm table-borderless mb-0" style="font-size:0.875rem;">
                             <tr><td class="text-muted" style="width:140px;">Nama</td><td class="fw-semibold">: <?= $slip['first_name'] . ' ' . $slip['last_name'] ?></td></tr>
-                            <tr><td class="text-muted">ID Karyawan</td><td class="fw-semibold">: <?= $slip['emp_id'] ?></td></tr>
                             <tr><td class="text-muted">Departemen</td><td>: <?= $slip['department_name'] ?? '-' ?></td></tr>
                             <tr><td class="text-muted">Jabatan</td><td>: <?= $slip['position_name'] ?? '-' ?></td></tr>
                         </table>
