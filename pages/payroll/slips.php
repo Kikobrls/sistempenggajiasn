@@ -84,6 +84,7 @@ include __DIR__ . '/../../includes/header.php';
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>No. Slip</th>
                                 <th>Karyawan</th>
                                 <th>Departemen</th>
                                 <th>Gaji Bersih</th>
@@ -95,8 +96,10 @@ include __DIR__ . '/../../includes/header.php';
                             <?php foreach ($payrolls as $i => $p): ?>
                             <tr>
                                 <td><?= $i+1 ?></td>
+                                <td><code><?= $p['payroll_number'] ?></code></td>
                                 <td>
                                     <div class="fw-semibold"><?= $p['first_name'] . ' ' . $p['last_name'] ?></div>
+                                    <small class="text-muted"><?= $p['emp_id'] ?></small>
                                 </td>
                                 <td><span class="badge bg-primary bg-opacity-10 text-primary"><?= $p['department_name'] ?? '-' ?></span></td>
                                 <td class="fw-bold"><?= formatRupiah($p['net_salary']) ?></td>
