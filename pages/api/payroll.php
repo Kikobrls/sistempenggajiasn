@@ -87,7 +87,7 @@ switch ($action) {
             
             $netSalary = $grossSalary - $totalDeductions - $tax;
             
-            $payrollNum = sprintf('GJI-%04d%02d-%03d', $year, $month, $emp['id']);
+            $payrollNum = sprintf('%04d%02d%03d', $year, $month, $emp['id']);
             
             $allowanceDetails = json_encode([
                 ['name' => 'Tunjangan Transportasi', 'amount' => $transport],

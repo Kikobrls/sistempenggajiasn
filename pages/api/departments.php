@@ -26,26 +26,25 @@ switch ($action) {
     case 'save':
         $id = (int)($_POST['id'] ?? 0);
         $name = sanitize($_POST['name'] ?? '');
-        $code = sanitize($_POST['code'] ?? '');
         $description = sanitize($_POST['description'] ?? '');
         $manager = sanitize($_POST['manager_name'] ?? '');
 
-        if (empty($name) || empty($code)) {
-            jsonResponse(['success' => false, 'message' => 'Nama dan kode wajib diisi'], 400);
+        if (empty($name)) {
+            jsonResponse(['success' => false, 'message' => 'Nama departemen wajib diisi'], 400);
         }
 
         try {
             if ($id > 0) {
-                $stmt = $db->prepare("UPDATE departments SET name=?, code=?, description=?, manager_name=? WHERE id=?");
-                $stmt->execute([$name, $code, $description, $manager, $id]);
+                $stmt = $db->prepare("UPDATE departments SET name=?, description=?, manager_name=? WHERE id=?");
+                $stmt->execute([$name, $description, $manager, $id]);
                 jsonResponse(['success' => true, 'message' => 'Departemen berhasil diperbarui']);
             } else {
-                $stmt = $db->prepare("INSERT INTO departments (name, code, description, manager_name) VALUES (?,?,?,?)");
-                $stmt->execute([$name, $code, $description, $manager]);
+                $stmt = $db->prepare("INSERT INTO departments (name, description, manager_name) VALUES (?,?,?)");
+                $stmt->execute([$name, $description, $manager]);
                 jsonResponse(['success' => true, 'message' => 'Departemen berhasil ditambahkan']);
             }
         } catch (PDOException $e) {
-            jsonResponse(['success' => false, 'message' => 'Kode departemen sudah ada'], 400);
+            jsonResponse(['success' => false, 'message' => 'Gagal menyimpan departemen: ' . $e->getMessage()], 400);
         }
         break;
 

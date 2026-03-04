@@ -9,14 +9,6 @@ $db = db();
 $departments = $db->query("SELECT * FROM departments WHERE is_active=1 ORDER BY name")->fetchAll();
 $positions = $db->query("SELECT * FROM positions WHERE is_active=1 ORDER BY name")->fetchAll();
 
-// Generate next employee ID
-$lastEmp = $db->query("SELECT employee_id FROM employees ORDER BY id DESC LIMIT 1")->fetchColumn();
-$nextNum = 1;
-if ($lastEmp && preg_match('/KRY-(\d+)/', $lastEmp, $m)) {
-    $nextNum = (int)$m[1] + 1;
-}
-$nextEmpId = sprintf('KRY-%03d', $nextNum);
-
 include __DIR__ . '/../../includes/header.php';
 ?>
 
@@ -52,15 +44,11 @@ include __DIR__ . '/../../includes/header.php';
                         </div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">ID Karyawan <span class="text-danger">*</span></label>
-                                    <input type="text" name="employee_id" class="form-control" value="<?= $nextEmpId ?>" required>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label class="form-label">Nama Depan <span class="text-danger">*</span></label>
                                     <input type="text" name="first_name" class="form-control" placeholder="Nama depan" required>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label class="form-label">Nama Belakang</label>
                                     <input type="text" name="last_name" class="form-control" placeholder="Nama belakang">
                                 </div>

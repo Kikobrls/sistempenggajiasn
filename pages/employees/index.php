@@ -91,7 +91,6 @@ include __DIR__ . '/../../includes/header.php';
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>ID Karyawan</th>
                                 <th>Nama</th>
                                 <th>Departemen</th>
                                 <th>Jabatan</th>
@@ -104,7 +103,6 @@ include __DIR__ . '/../../includes/header.php';
                             <?php foreach ($employees as $i => $emp): ?>
                             <tr>
                                 <td><?= $i + 1 ?></td>
-                                <td><code class="text-primary fw-semibold"><?= $emp['employee_id'] ?></code></td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="avatar-circle avatar-sm" style="background: linear-gradient(135deg, <?= $emp['gender']=='L' ? '#4f46e5,#7c3aed' : '#ec4899,#f43f5e' ?>);">

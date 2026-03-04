@@ -46,15 +46,11 @@ include __DIR__ . '/../../includes/header.php';
                         <div class="card-header"><h5 class="card-title mb-0"><i class="bi bi-person me-2"></i>Informasi Pribadi</h5></div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label">ID Karyawan</label>
-                                    <input type="text" name="employee_id" class="form-control" value="<?= $emp['employee_id'] ?>" required>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label class="form-label">Nama Depan <span class="text-danger">*</span></label>
                                     <input type="text" name="first_name" class="form-control" value="<?= $emp['first_name'] ?>" required>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <label class="form-label">Nama Belakang</label>
                                     <input type="text" name="last_name" class="form-control" value="<?= $emp['last_name'] ?>">
                                 </div>

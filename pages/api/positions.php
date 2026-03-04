@@ -26,28 +26,27 @@ switch ($action) {
     case 'save':
         $id = (int)($_POST['id'] ?? 0);
         $name = sanitize($_POST['name'] ?? '');
-        $code = sanitize($_POST['code'] ?? '');
         $department_id = (int)($_POST['department_id'] ?? 0);
         $level = sanitize($_POST['level'] ?? 'Staf');
         $base_salary = (float)str_replace(['.', ','], ['', '.'], $_POST['base_salary'] ?? '0');
         $description = sanitize($_POST['description'] ?? '');
 
-        if (empty($name) || empty($code)) {
-            jsonResponse(['success' => false, 'message' => 'Nama dan kode wajib diisi'], 400);
+        if (empty($name)) {
+            jsonResponse(['success' => false, 'message' => 'Nama jabatan wajib diisi'], 400);
         }
 
         try {
             if ($id > 0) {
-                $stmt = $db->prepare("UPDATE positions SET name=?, code=?, department_id=?, level=?, base_salary=?, description=? WHERE id=?");
-                $stmt->execute([$name, $code, $department_id, $level, $base_salary, $description, $id]);
+                $stmt = $db->prepare("UPDATE positions SET name=?, department_id=?, level=?, base_salary=?, description=? WHERE id=?");
+                $stmt->execute([$name, $department_id, $level, $base_salary, $description, $id]);
                 jsonResponse(['success' => true, 'message' => 'Jabatan berhasil diperbarui']);
             } else {
-                $stmt = $db->prepare("INSERT INTO positions (name, code, department_id, level, base_salary, description) VALUES (?,?,?,?,?,?)");
-                $stmt->execute([$name, $code, $department_id, $level, $base_salary, $description]);
+                $stmt = $db->prepare("INSERT INTO positions (name, department_id, level, base_salary, description) VALUES (?,?,?,?,?)");
+                $stmt->execute([$name, $department_id, $level, $base_salary, $description]);
                 jsonResponse(['success' => true, 'message' => 'Jabatan berhasil ditambahkan']);
             }
         } catch (PDOException $e) {
-            jsonResponse(['success' => false, 'message' => 'Kode jabatan sudah ada'], 400);
+            jsonResponse(['success' => false, 'message' => 'Gagal menyimpan jabatan: ' . $e->getMessage()], 400);
         }
         break;
 

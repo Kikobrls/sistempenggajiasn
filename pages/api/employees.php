@@ -37,7 +37,6 @@ switch ($action) {
     case 'save':
         $id = (int)($_POST['id'] ?? 0);
         $data = [
-            'employee_id' => sanitize($_POST['employee_id'] ?? ''),
             'first_name' => sanitize($_POST['first_name'] ?? ''),
             'last_name' => sanitize($_POST['last_name'] ?? ''),
             'email' => sanitize($_POST['email'] ?? ''),
@@ -65,13 +64,13 @@ switch ($action) {
         try {
             if ($id > 0) {
                 // Update
-                $sql = "UPDATE employees SET employee_id=?, first_name=?, last_name=?, email=?, phone=?, gender=?, birth_date=?, address=?, city=?, department_id=?, position_id=?, hire_date=?, employment_status=?, bank_name=?, bank_account=?, npwp=?, bpjs_kesehatan=?, bpjs_ketenagakerjaan=?, base_salary=? WHERE id=?";
+                $sql = "UPDATE employees SET first_name=?, last_name=?, email=?, phone=?, gender=?, birth_date=?, address=?, city=?, department_id=?, position_id=?, hire_date=?, employment_status=?, bank_name=?, bank_account=?, npwp=?, bpjs_kesehatan=?, bpjs_ketenagakerjaan=?, base_salary=? WHERE id=?";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([...array_values($data), $id]);
                 jsonResponse(['success' => true, 'message' => 'Data karyawan berhasil diperbarui']);
             } else {
                 // Insert
-                $sql = "INSERT INTO employees (employee_id, first_name, last_name, email, phone, gender, birth_date, address, city, department_id, position_id, hire_date, employment_status, bank_name, bank_account, npwp, bpjs_kesehatan, bpjs_ketenagakerjaan, base_salary) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO employees (first_name, last_name, email, phone, gender, birth_date, address, city, department_id, position_id, hire_date, employment_status, bank_name, bank_account, npwp, bpjs_kesehatan, bpjs_ketenagakerjaan, base_salary) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $stmt = $db->prepare($sql);
                 $stmt->execute(array_values($data));
                 jsonResponse(['success' => true, 'message' => 'Karyawan berhasil ditambahkan', 'id' => $db->lastInsertId()]);
@@ -79,7 +78,7 @@ switch ($action) {
         } catch (PDOException $e) {
             $msg = 'Gagal menyimpan data';
             if (strpos($e->getMessage(), 'Duplicate') !== false) {
-                $msg = 'ID Karyawan atau Email sudah terdaftar';
+                $msg = 'Email sudah terdaftar';
             }
             jsonResponse(['success' => false, 'message' => $msg], 400);
         }

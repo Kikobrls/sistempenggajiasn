@@ -40,7 +40,6 @@ include __DIR__ . '/../../includes/header.php';
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kode</th>
                                 <th>Nama Jabatan</th>
                                 <th>Departemen</th>
                                 <th>Level</th>
@@ -53,7 +52,6 @@ include __DIR__ . '/../../includes/header.php';
                             <?php foreach ($positions as $i => $pos): ?>
                             <tr>
                                 <td><?= $i + 1 ?></td>
-                                <td><code class="text-primary fw-semibold"><?= $pos['code'] ?></code></td>
                                 <td class="fw-semibold"><?= $pos['name'] ?></td>
                                 <td><span class="badge bg-primary bg-opacity-10 text-primary"><?= $pos['department_name'] ?? '-' ?></span></td>
                                 <td>
@@ -93,10 +91,6 @@ include __DIR__ . '/../../includes/header.php';
                     <div class="mb-3">
                         <label class="form-label">Nama Jabatan <span class="text-danger">*</span></label>
                         <input type="text" name="name" id="posName" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Kode <span class="text-danger">*</span></label>
-                        <input type="text" name="code" id="posCode" class="form-control" maxlength="20" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Departemen</label>
@@ -158,7 +152,6 @@ function editPos(pos) {
     document.getElementById('posModalTitle').textContent = 'Edit Jabatan';
     document.getElementById('posId').value = pos.id;
     document.getElementById('posName').value = pos.name;
-    document.getElementById('posCode').value = pos.code;
     document.getElementById('posDept').value = pos.department_id || '';
     document.getElementById('posLevel').value = pos.level;
     document.getElementById('posSalary').value = parseInt(pos.base_salary).toLocaleString('id-ID');
